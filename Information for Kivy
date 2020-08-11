@@ -1,0 +1,105 @@
+Lesson 1: The basics
+
+1. In the class from the parent class, App, you do not add a __init__ function
+    - This is because it will call more functions from the parent class
+
+2. To run the app, you also need a code:
+    - if __name__ == '__main__':
+        Class_Name().run()
+            - This code is important because it allows you to add the designs into the window
+            - In addition, we have a run method even though we didn't write one because
+              in the App parent class, there is already a run method
+                - This allows the build method to run to build the window
+
+3. build method
+    - Is what determines goes inside the window
+
+Lesson 2: Labels, Input and GUI Layouts
+
+1. If you want to add more labels, then you should make a new class
+    - This class will only be a storage class to store the designs
+    - In MyKivyApp.py, it is represented by the class, MyGrid
+        - In this class we need the __init__ function along with another parameter called
+          kwarg (a.k.a keyword)
+            - There are 2 stars (**) in front of it to indicate that this parameter has infinite
+              amounts of input
+    - After making the class, we need to call the Grid Layout
+        - We do this by calling the super() function
+
+Lesson 3: Creating Buttons and Triggering Events
+
+1. Adding Buttons
+    - To add a button, you just import it
+    - However, if you want the button in the middle, you will need to add another grid inside of the
+      original grid
+        - What will happen is that, the button/label/input/whatever it is that will be in the middle/span
+          2 whole columns, will be put in the main Grid Layout, and the other inputs will be put in
+          another one
+            - In MyKivyApp, the second Grid Layout is shown in the "self.inside"
+        - After adding all the other inputs into the second Grid Layout, when you run it, it would not be
+          seen, since it is hidden in the self.inside, technically making it not part of the actual class
+            - That means that you will have to add another widget with self.inside in order for the inputs
+              inside it to be seen
+
+2. Binding the Buttons
+    - To bind the function of the button to the actual button, you need to do .bind(on_press=self.function_name)
+        - In MyKivyApp example, it is done like this:
+            - self.submit.bind(on_press=self.pressed)
+
+3. Cleaning TextInput After Submit
+    - To get rid of the text in the TextInput box after clicking the submit button, you just have to give it a
+      blank statement ("")
+
+Lesson 4: The KV Design Language
+
+1. .KV File
+    - A KV file makes it easier to design the window
+    - First, you need to make a styling file, which will contain all the styling information
+        - To make a kivy file, you need to take the name of your class that you will run (In my case, MyKivyApp),
+          and type it lowercase, no spaces, with a .kv at the end
+            - In your class name ends with word app in it, you must take it out
+            - Ex: MyKivyApp == mykivy.kv
+    - Now, in the .kv file, they will not use brackets and instead rely on indentation to differentiate code
+        - When you run your .py file, the .kv file will look for the class name in between the angled brackets (<>)
+            - Ex:
+                - In testfile.kv, I typed the name testfile
+                - when you run it, kivy will look for a class that uses the name testfile
+        - Remember: when typing on the .kv file, equal signs (=) in python should be replaced with colons (:)
+            - If you use equal signs, the .kv file will not work
+    - If you want to make your .kv design larger, you have to define it
+        - Since MyGrid is just a widget, there is a default size and position that a widgets has
+        - We need to override these default settings by defining your own
+            - To make the width and height the same as the screen size, we do:
+                - root.width, root.height
+                    - The root widget in this situation means MyGrid, which means that it will have the width and the
+                      height as the full screen
+            - If you don't want to make the design the full screen, you can also subtract
+                - Ex:
+                    - size: root.width - 200, root.height - 200
+                        - This will decrease by 200 from the top and the right side of the screen
+            - To make it in the middle, you can do:
+                - size: root.width -200, root.height -200
+                - pos: 100, 100
+                    - pos stands for position and the 100s mean that you will pad by 100
+                        - This will pad all the sides of the screen by 100
+
+Lesson 5: Object Properties and .KV Continued
+
+1. Object Properties
+    -How would you get information using .kv file?
+        - You do this by creating global variables and giving ids
+        - You create variable(s), in my case name and email, and make them equal to an id
+            - An id can be anything: in my case, I wrote name and email
+        - After creating your id, you need to put them somewhere
+            - In testfile.kv, I put the id in both TextInput, so the input is saved in the id
+        - Now, you go back to your .py file and import ObjectProperty
+            - In the MyGrid class, you add the variable(s) that you have made in there and equal to ObjectProperty(None)
+                - This is important because there is no value in ObjectProperty before, only after an input is there,
+                  while there be a value
+                - Remember: the variable name in the .kv file MUST match te variable in the .py file
+
+2.
+
+
+
+
